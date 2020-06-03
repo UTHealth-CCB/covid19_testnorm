@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+    <body>
+        <div align="center">
+            <form id="mapping_form">
+                <label>COVID19 TestNorm</label>
+                <br/>
+                <br/>
+                <br/>
+                <label>COVID19 testing names: </label><input id="input" type="text" name="covid19_testing_names" size="50" height="100"/>
+                <button type="submit" value="Mapping">Mapping</button>                
+                </br>   
+                </br>         
+                <div id="mapping_output"> </div>
+            </form>
+        </div>
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript">
+            $('#mapping_form').submit(function(e) {
+                    e.preventDefault();
+
+                    var data = {};
+                    var Form = this;
+
+                    $.each(this.elements, function(i, v) {
+                        var input = $(v);
+                        data[input.attr("name")] = input.val();
+                        delete data["undefined"];
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/mapping',
+                        dataType: 'json',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        context: Form,
+                        success: function(callback) {
+                            console.log(callback);
+                            $('#mapping_output').html( 'Mapping LOINC codes: ' + callback.loinc_codes );
+                            //$("#input").val("");
+                        },
+                        error: function() {
+                            $(this).html("Something error!");
+                        }
+                    });
+                });
+        </script>
+    </body>
+</html>
