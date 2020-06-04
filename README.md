@@ -10,6 +10,11 @@ Figure 1 shows an overview of the modules of the COVID-19 TestNorm system, mainl
 
 ![Alt text](/docs/overview.png?raw=true "Overview of COVID19 TestNorm")
 
+Figure 2 shows the flow chart of coding rules for COVID-19 LOINC mapping. 
+
+![Alt text](/docs/coding_rules.png?raw=true "Flow chart of Coding rules for COVID19 mapping")
+
+
 TestNorm
 
 This folder contains COVID19 TestNorm codes for rules-based method including entity recognition and LOINC mapping.
