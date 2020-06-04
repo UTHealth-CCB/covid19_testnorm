@@ -26,4 +26,5 @@ Run the test.py: python test.py 'NOVEL CORONAVIRUS 2019 rRT PCR, NASOPHAR'.
 The mapping LOINC codes will be displayed as: 94500-6.
 
 References
+
 [1] Barton CM, Alberti M, Ames D, Atkinson J-A, Bales J, Burke E, et al. Call for transparency of COVID-19 models. Science. 2020 01;368(6490):482–3.
