@@ -15,7 +15,7 @@ This folder contains the example template file for TestNorm WebAPI using Flask.
 
 Run
 
-The following steps briefly describes how to run the TestNorm tool locally with webservice using Flask.
+The following steps briefly describe how to run the TestNorm tool locally with webservice using Flask.
 
 Install requirement packages in requirement.txt: pip install -r requirements.txt.
 
