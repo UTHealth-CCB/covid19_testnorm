@@ -6,6 +6,10 @@ To efficiently conduct clinical studies across different institutions within a n
 
 This repository contains supplementary data and code to the tool: COVID-19 TestNorm -  A tool to normalize COVID-19 testing names to LOINC codes.
 
+Figure 1 shows an overview of the modules of the COVID-19 TestNorm system, mainly including entity recognition and LOINC mapping, with inputs from knowledge components such as lexicons and coding rules. 
+
+![Alt text](/docs/overview.jpg?raw=true "Overview of COVID19 TestNorm")
+
 TestNorm
 
 This folder contains COVID19 TestNorm codes for rules-based method including entity recognition and LOINC mapping.
