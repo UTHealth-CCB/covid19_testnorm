@@ -1,6 +1,6 @@
 # covid19_testnorm
 
-Coronavirus disease 2019 (COVID-19) was declared as a pandemic by the World Health Organization (WHO) on March 11th 2020 and it has raised a serious global health crisis since then. As stated by Science - “it is more important than ever for scientists around the world to openly share their knowledge, expertise, tools, and technology”. 
+Coronavirus disease 2019 (COVID-19) was declared as a pandemic by the World Health Organization (WHO) on March 11th 2020 and it has raised a serious global health crisis since then. As stated by Science - “it is more important than ever for scientists around the world to openly share their knowledge, expertise, tools, and technology” [1].
 
 To efficiently conduct clinical studies across different institutions within a network, one requirement is to normalize clinical data to common data models (CDM) and standard terminologies. Among different types of clinical data, COVID-19 diagnostic testings are extremely important for all the following analyses, as they are the primary means to identify the confirmed COVID-19 cases. To address the urgency of the pandemic, individual institutions have created local names and local codes for those new COVID-19 testings in their EHRs. Meanwhile, LOINC (The standard code system for laboratory observations), a widely used international standard for lab tests, has responded quickly by developing a new set of standard codes for COVID-19 testings, to guide standard coding of COVID-19 testings in clinical settings. 
 
@@ -24,3 +24,6 @@ Install requirement packages in requirement.txt: pip install -r requirements.txt
 Run the test.py: python test.py 'NOVEL CORONAVIRUS 2019 rRT PCR, NASOPHAR'.
 
 The mapping LOINC codes will be displayed as: 94500-6.
+
+References
+[1] Barton CM, Alberti M, Ames D, Atkinson J-A, Bales J, Burke E, et al. Call for transparency of COVID-19 models. Science. 2020 01;368(6490):482–3.
