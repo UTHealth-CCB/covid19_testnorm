@@ -17,7 +17,7 @@ This folder contains the full list of LOINC SARS CoV 2 lab tests (from https://l
 
 Run
 
-The following steps briefly describe how to install and run the TestNorm tool locally with webservice using Flask.
+The following steps briefly describe how to run the TestNorm tool.
 
 Install requirement packages in requirement.txt: pip install -r requirements.txt.
 
