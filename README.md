@@ -3,7 +3,7 @@ This repository contains supplementary data and code to the tool: COVID-19 TestN
 
 TestNorm
 
-This folder contains COVID19 TestNorm codes for rules-based method for entity recognition and LOINC mapping.
+This folder contains COVID19 TestNorm codes for rules-based method including entity recognition and LOINC mapping.
 
 data
 
