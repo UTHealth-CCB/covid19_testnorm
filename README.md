@@ -3,10 +3,11 @@ This repository contains supplementary data and code to the tool: COVID-19 TestN
 
 TestNorm
 
-This folder contains TestNorm codes for rules-based method for entity recognition and LOINC mapping.
+This folder contains COVID19 TestNorm codes for rules-based method for entity recognition and LOINC mapping.
 
 data
 
+This folder contains the full list of LOINC SARS CoV 2 lab tests (from https://loinc.org/sars-coronavirus-2/), and IVD testkits data (from https://loinc.org/sars-cov-2-and-covid-19/), and Covid19 lexicons file (mannually annotated from multi-sites data)
 
 The following steps briefly describes how to run the TestNorm tool locally with webservice using Flask.
 
