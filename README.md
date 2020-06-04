@@ -11,7 +11,7 @@ This folder contains the full list of LOINC SARS CoV 2 lab tests (from https://l
 
 templates
 
-This folder contains the example template file for TestNorm WebserAPI using Flask.
+This folder contains the example template file for TestNorm WebAPI using Flask.
 
 Run
 
