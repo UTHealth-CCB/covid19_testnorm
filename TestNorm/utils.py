@@ -4,11 +4,11 @@ from collections import Iterable
 
 # pre_tokenize: preprocessing for query string
 # insert preceding and subsequent space for non-alphabetnumeric character and replace multiple space with one space
-# [IN]: str -- input string
-# [IN]: trip_non_alnum -- trip non alpha&number character and replace it with ' ' if True else keep all characters, False by default
-# [IN]: inert_period -- inser period(.) before '\n' if True, False by default
-# [IN]: windows_style -- str is windows-style for CRLF as '\r\n else '\n', False by default
-# [RET]: return pre-tokenized str
+# str -- input string
+# trip_non_alnum -- trip non alpha&number character and replace it with ' ' if True else keep all characters, False by default
+# inert_period -- inser period(.) before '\n' if True, False by default
+# windows_style -- str is windows-style for CRLF as '\r\n' else '\n', False by default
+# return pre-tokenized str
 def pre_tokenize(str, trip_non_alnum=False, insert_period=False, windows_style=False):    
     period = '.' if insert_period else ''
     CRLF = '\r\n' if windows_style else '\n'    
@@ -25,10 +25,10 @@ def pre_tokenize(str, trip_non_alnum=False, insert_period=False, windows_style=F
 
 # contains(source, target, whole_match=True) 
 # judge whether source contains target
-# [IN]: source -- source string or iterable obj, if iterable, each item should be string
-# [IN]: target -- target string or iterable obj, if iterable, each item should be string 
-# [IN]: whole_match -- whether match in whole word, True by default, word is seprated by space or puncs using pre_tokenize function) or partial
-# [RET]: return matched target if target is string else return matched items in list for iterable target
+# source -- source string or iterable obj, if iterable, each item should be string
+# target -- target string or iterable obj, if iterable, each item should be string 
+# whole_match -- whether match in whole word, True by default, word is seprated by space or puncs using pre_tokenize function) or partial
+# return matched target if target is string else return matched items in list for iterable target
 def contains(source, target, whole_match=True):
     trip_non_alnum = True
     if type(source) == str:
