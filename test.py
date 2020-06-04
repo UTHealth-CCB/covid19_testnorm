@@ -7,9 +7,9 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         input = sys.argv[1]
     else:
-        input = 'Coronavirus (COVID-19) NAA City Health Dept'
         print("Usage: python test.py 'COVID19-test-name'")
         print('using the default input: {}'.format(input))        
+        input = 'Coronavirus (COVID-19) NAA City Health Dept'
     rules_data = load_rules_data()    
     loinc_codes, ner_dict = get_loinc_codes(input, rules_data)
     print('mapping {} to LOINC codes: {}'.format(input, loinc_codes))    
