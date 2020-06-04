@@ -8,7 +8,7 @@ This repository contains supplementary data and code to the tool: COVID-19 TestN
 
 Figure 1 shows an overview of the modules of the COVID-19 TestNorm system, mainly including entity recognition and LOINC mapping, with inputs from knowledge components such as lexicons and coding rules. 
 
-![Alt text](/docs/overview.jpg?raw=true "Overview of COVID19 TestNorm")
+![Alt text](/docs/overview.png?raw=true "Overview of COVID19 TestNorm")
 
 TestNorm
 
