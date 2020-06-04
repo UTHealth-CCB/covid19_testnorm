@@ -9,6 +9,12 @@ data
 
 This folder contains the full list of LOINC SARS CoV 2 lab tests (from https://loinc.org/sars-coronavirus-2/), and IVD testkits data (from https://loinc.org/sars-cov-2-and-covid-19/), and Covid19 lexicons file (mannually annotated from multi-sites data)
 
+templates
+
+This folder contains the example template file for TestNorm WebserAPI using Flask.
+
+Run
+
 The following steps briefly describes how to run the TestNorm tool locally with webservice using Flask.
 
 Install requirement packages in requirement.txt: pip install -r requirements.txt.
