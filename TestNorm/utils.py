@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May 7 12:00:32 2020
-
-@author: jli34
-"""
 import re
 import functools
 from collections import Iterable
