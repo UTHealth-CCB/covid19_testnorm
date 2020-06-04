@@ -1,5 +1,2 @@
 pandas
 numpy
-flask
-Jinja2
-gunicorn
