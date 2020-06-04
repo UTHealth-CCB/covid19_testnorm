@@ -9,7 +9,7 @@ if __name__ == '__main__':
     else:
         print("Usage: python test.py 'COVID19-test-name'")
         input = 'Coronavirus (COVID-19) NAA City Health Dept'
-        print('using the default input: {}'.format(input))                
+        print('using the default test input: {}'.format(input))                
     rules_data = load_rules_data()    
     loinc_codes, _ = get_loinc_codes(input, rules_data)
     print('mapping {} to LOINC codes: {}'.format(input, loinc_codes))    
