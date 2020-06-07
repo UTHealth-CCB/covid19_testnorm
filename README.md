@@ -32,7 +32,7 @@ Install requirement packages in requirement.txt: pip install -r requirements.txt
 
 Run the test.py: python test.py 'NOVEL CORONAVIRUS 2019 rRT PCR, NASOPHAR'.
 
-The mapping LOINC codes will be displayed as: 94500-6.
+The mapping LOINC codes together with fully specifid name will be displayed as: '94500-6' and 'SARS coronavirus 2 RNA:PrThr:Pt:Respiratory:Ord:Probe.amp.tar'
 
 References
 
