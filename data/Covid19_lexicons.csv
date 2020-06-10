@@ -10,11 +10,19 @@ NP,SWABS
 NP,NASOPHARYNGEAL CYTOLOGIC MATERIAL
 NP,NASOPHARYNGEAL SWAB
 NP,NASOPHARYNGEAL CAVITY
+NP,NASOPHAR
 NP,NP
 ,
 Blood,SERUM
 Blood,PLASMA
 Blood,BLOOD
+Blood,Ser
+Blood,Plas
+Blood,Plsm
+Blood,Pl
+Blood,SerP
+Blood,SerPl
+Blood,SerPlas
 ,
 Respiratory,ORAL PORTION OF NASOPHARYNX
 Respiratory,NASAL SEPTUM
@@ -63,6 +71,7 @@ Respiratory,RESPIRATORY
 ,
 Saliva,SALIVA
 Saliva,ORAL FLUID
+Saliva,SAL
 ,
 Other,OTHER
 Other,UNSPECIFIED
@@ -72,7 +81,6 @@ Other,MICRO SPECIMEN
 Other,NEPHRON
 Other,UNKNOWN
 Other,"BODY FLUID, NOS"
-,
 ,
 Covid19,SARS-COV-2
 Covid19,SARS COV 2
@@ -96,6 +104,9 @@ Covid19,COVID-19 VIRUS (CORONAVIRUS)
 Covid19,COVID-19 (CORONAVIRUS)
 Covid19,COVID-19 VIRUS
 Covid19,Sars-Covid 2
+Covid19,SarsCov-2
+Covid19,Cov-2
+Covid19,Cov2
 ,
 Covid19_Related,SARS-related CoV
 Covid19_Related,SARS-related coronavirus
@@ -107,6 +118,7 @@ Covid19_Related,Coronavirus
 Covid19_Related,Sars-Covid
 Covid19_Related,Sars-Cov
 Covid19_Related,SARS-CoV+SARS-CoV-2
+Covid19_Related,COVID
 ,
 RNA_Comp,RNA
 RNA_Comp,N gene
@@ -119,6 +131,7 @@ RNA_Comp,CDC primer-probe set N2
 ,
 Sequence_Comp,whole genome
 Sequence_Comp,Nucleotide sequence
+Sequence_Comp,Sequence
 ,
 Antigen_Comp,Ag
 Antigen_Comp,Antigen
@@ -139,6 +152,7 @@ Antibody_Comp,IgG+IgM
 Antibody_Comp,IgG IgM
 Antibody_Comp,Total Ab
 Antibody_Comp,Total Antibody
+Antibody_Comp,Plasma Product
 ,
 Interpretation_Comp,Interpretation
 Interpretation_Comp,Qualitative_interpretation
@@ -158,6 +172,7 @@ RNA_Method,RT PCR
 RNA_Method,PCR
 RNA_Method,OVERALL RESULT
 RNA_Method,OVERALL RESULTS
+RNA_Method,Melt curve analysis
 ,
 Sequence_Method,Sequencing
 ,
