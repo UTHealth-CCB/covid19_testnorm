@@ -160,9 +160,9 @@ def load_rules_data():
     return rules_data
 
 # disambiguate_ners: disambiguate ners between two list of ners, i.e., to removing ambiguation between two ner list if there're strict-parital-overlap between them
-# if the same item exists in both ners, remove the same item in the second ner list
+# if the same item exists in both ners, leave them and let root axle to disambiguate them (e.g., 'rapid' method for RNA, Antigen, and/or Antibody)
 # ner_list_1, ner_list_2 -- list of ner string
-# return new_ner_1 and new_ner_list_2 without strict-parital-overlap ambiguation and the same items in both ners
+# return new_ner_1 and new_ner_list_2 without strict-parital-overlap ambiguation
 def disambiguate_ners(ner_list_1, ner_list_2):
     if (type(ner_list_1) != list) or  (type(ner_list_2) != list):
         print('Disambiguate_ners: input parameters not list type and do nothing!')    
@@ -175,8 +175,8 @@ def disambiguate_ners(ner_list_1, ner_list_2):
         for ner2 in ners_2:
             # if ner2 is the same as ner1, there should be typos in the lexicons file. Remove ner2 in ner_list_2 only
             if ner2 == ner1:
-                print('There may be duplicates in the common lexicons file, since ner {} are in two different sub-categories under the same root axle. Will remove it in the second ner list!'.format(ner2))
-                del_ner_2.add(ner2)
+                print('Ner {} are in two different sub-categories under the same root axle, keep them.'.format(ner2))
+                #del_ner_2.add(ner2) # leave it and let root axle to disambiguate them
             elif contains(ner1, ner2):
                 # ner2 is partial of ner1, delete ner2
                 del_ner_2.add(ner2)
@@ -227,6 +227,9 @@ def get_ner_dict_by_rule(query_text, rules_ner_dict):
     query_ner_dict['Method']['Antigen'] = contains(query_text, rules_ner_dict['Method']['Antigen'])    
     query_ner_dict['Method']['Growth'] = contains(query_text, rules_ner_dict['Method']['Growth'])    
     query_ner_dict['Method']['Antibody'] = contains(query_text, rules_ner_dict['Method']['Antibody'])        
+    # disambiguate from RNA and Antigen/Antibody, e.g, for 'rapid' method in 'covid19 rapid ia', may belong to RNA, Antigen, and Antibody
+    disambiguate_ners(query_ner_dict['Method']['RNA'], query_ner_dict['Method']['Antigen'])
+    disambiguate_ners(query_ner_dict['Method']['RNA'], query_ner_dict['Method']['Antibody'])
 
     # for panel, list separately in method dict
     query_ner_dict['Method']['Panel'] = contains(query_text, rules_ner_dict['Method']['Panel'])        
