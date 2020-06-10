@@ -21,7 +21,7 @@ This folder contains COVID19 TestNorm codes for rules-based method including ent
 
 data
 
-This folder contains the full list of LOINC SARS CoV 2 lab tests (from https://loinc.org/sars-coronavirus-2/), and IVD testkits data (https://www.cdc.gov/csels/dls/sars-cov-2-livd-codes.html and https://loinc.org/sars-cov-2-and-covid-19/), and Covid19 lexicons file (mannually annotated from multi-sites data).
+This folder contains the full list of LOINC SARS CoV 2 lab tests (from https://loinc.org/sars-coronavirus-2/), and IVD testkits data (from https://www.cdc.gov/csels/dls/sars-cov-2-livd-codes.html and https://loinc.org/sars-cov-2-and-covid-19/), and Covid19 lexicons file (mannually annotated from multi-sites data).
 
 
 Run
