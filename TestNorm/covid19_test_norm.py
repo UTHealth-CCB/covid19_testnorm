@@ -15,6 +15,7 @@ loinc_ner_dict = {'Component': {'Covid19': [], 'Covid19_Related': [], 'RNA': [],
                  }
 
 def load_rules_data():
+    """Load rules data"""
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     data_dir = os.path.join(cur_dir, '../data')
     covid19_lexicons_fn = 'covid19_lexicons.csv'
@@ -159,11 +160,16 @@ def load_rules_data():
 
     return rules_data
 
-# disambiguate_ners: disambiguate ners between two list of ners, i.e., to removing ambiguation between two ner list if there're strict-parital-overlap between them
-# if the same item exists in both ners, leave them and let root axle to disambiguate them (e.g., 'rapid' method for RNA, Antigen, and/or Antibody)
-# ner_list_1, ner_list_2 -- list of ner string
-# return new_ner_1 and new_ner_list_2 without strict-parital-overlap ambiguation
 def disambiguate_ners(ner_list_1, ner_list_2):
+    """Disambiguate ners between two list of ners, i.e., to removing ambiguation between two ner list if there're strict-parital-overlap between them    
+       If the same item exists in both ners, leave them and let root axle to disambiguate them (e.g., 'rapid' method for RNA, Antigen, and/or Antibody)
+
+    Args:
+        ner_list_1, ner_list_2: list of ner strings
+
+    Returns:
+        new ner_list_1 and ner_list_2 without strict-parital-overlap ambiguation
+    """    
     if (type(ner_list_1) != list) or  (type(ner_list_2) != list):
         print('Disambiguate_ners: input parameters not list type and do nothing!')    
         return
@@ -190,6 +196,7 @@ def disambiguate_ners(ner_list_1, ner_list_2):
             ner_list_2.remove(ner)    
 
 def get_ner_dict_by_rule(query_text, rules_ner_dict):
+    """Get NER dict by rules data."""
     query_ner_dict = copy.deepcopy(loinc_ner_dict)
     
     query_ner_dict['Institution']['Manufacturer'] = list(set(contains(query_text, rules_ner_dict['Institution']['Manufacturer'])))    
@@ -251,12 +258,17 @@ def get_ner_dict_by_rule(query_text, rules_ner_dict):
 
     return query_ner_dict
 
-# get_loinc_codes_as_rna_naa: get loinc codes as for RNA purpose with NAA method
-# source --input covid19 testing names
-# ner_dict -- NER dict from source and rules_data
-# default_specimen -- set default specimen as 'NP', 'Respiratory', etc., '' by default
-# return appropriate LOINC codes in list
 def get_loinc_codes_as_rna_naa(source, ner_dict, default_specimen=''):
+    """Get loinc codes as for RNA purpose with NAA method.    
+
+    Args:
+        source: input covid19 testing names
+        ner_dict: NER dict from source and rules_data
+        default_specimen:  default specimen as 'NP', 'Respiratory', etc., '' by default
+
+    Returns:
+        Appropriate LOINC codes in list
+    """
     loinc_codes = []
     if contains(source, 'non-probe-based') or contains(source, 'non-probe') or contains(source, 'melt curve analysis'):        
         if ner_dict['System']['NP']:
@@ -597,10 +609,16 @@ def get_default_loinc_codes(source, ner_dict):
         loinc_codes = []
     return loinc_codes
 
-# get loinc codes by purpose: get loinc codes from query_text or ner_dict, according to rules in https://loinc.org/sars-coronavirus-2/, 
-# query_text: input query string
-# ner_dict: ner_dict based on query string and rules_data
 def get_loinc_codes_by_purpose(query_text, ner_dict):
+    """Get loinc codes from query_text or ner_dict, according to rules in https://loinc.org/sars-coronavirus-2/,     
+
+    Args:
+        query_text: input query string
+        ner_dict: ner_dict based on query string and rules_data
+
+    Returns:
+        Appropriate LOINC codes in list
+    """    
     loinc_codes = []
     if ner_dict['Component']['Covid19'] or ner_dict['Component']['Covid19_Related']:
         # 1. get_loinc_codes_from_rna
@@ -667,6 +685,7 @@ def get_loinc_codes_by_institution(query_text, ner_dict, rules_data):
     return loinc_codes
 
 def get_loinc_codes(query_text, rules_data, query_ner=False):
+    """Get appropriate LOINC codes."""
     loinc_codes = []
     #ner_dict = get_ner_dict_ml(query_ner['query'], query_ner['ner']) 
     ner_dict = get_ner_dict_by_rule(query_text, rules_data['ner_dict']) 

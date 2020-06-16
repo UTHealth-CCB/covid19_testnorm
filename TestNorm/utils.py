@@ -2,14 +2,19 @@ import re
 import functools
 from collections import Iterable
 
-# pre_tokenize: preprocessing for query string
-# insert preceding and subsequent space for non-alphabetnumeric character and replace multiple space with one space
-# str -- input string
-# trip_non_alnum -- trip non alpha&number character and replace it with ' ' if True else keep all characters, False by default
-# inert_period -- inser period(.) before '\n' if True, False by default
-# windows_style -- str is windows-style for CRLF as '\r\n else '\n', False by default
-# return pre-tokenized str
-def pre_tokenize(str, trip_non_alnum=False, insert_period=False, windows_style=False):    
+def pre_tokenize(text, trip_non_alnum=False, insert_period=False, windows_style=False):  
+    """Preprocessing for query string with tokenization.
+    insert preceding and subsequent space for non-alphabetnumeric character and replace multiple space with one space
+
+    Args:
+        text: input text
+        trip_non_alnum: bool, trip non alpha&number character and replace it with ' ' if True else keep all characters, False by default
+        inert_period: bool, inser period(.) before '\n' if True, False by default
+        windows_style: bool, str is windows-style for CRLF as '\r\n else '\n', False by default    
+
+    Returns:
+        Tokenized str
+    """
     period = '.' if insert_period else ''
     CRLF = '\r\n' if windows_style else '\n'    
     str = str.replace(CRLF, '.'+CRLF) if str.find(CRLF)>=0 else str+period
@@ -23,13 +28,17 @@ def pre_tokenize(str, trip_non_alnum=False, insert_period=False, windows_style=F
     str = str.strip(' ') # if no CRLF included, strip ' ' at both sides
     return str
 
-# contains(source, target, whole_match=True) 
-# judge whether source contains target
-# source -- source string or iterable obj, if iterable, each item should be string
-# target -- target string or iterable obj, if iterable, each item should be string 
-# whole_match -- whether match in whole word, True by default, word is seprated by space or puncs using pre_tokenize function) or partial
-# return matched target if target is string else return matched items in list for iterable target
 def contains(source, target, whole_match=True):
+    """Judge whether source contains target    
+
+    Args:
+        source: string or iterable obj, if iterable, each item should be string
+        target: string or iterable obj, if iterable, each item should be string 
+        whole_match: bool, whether match in whole word, True by default, word is seprated by space or puncs using pre_tokenize function) or partial        
+
+    Returns:
+        Matched target if target is string else return matched items in list for iterable target
+    """    
     trip_non_alnum = True
     if type(source) == str:
         source_pt = pre_tokenize(source.lower(), trip_non_alnum)
@@ -87,8 +96,8 @@ def contains(source, target, whole_match=True):
                         ret.append(tar)
             return ret
 
-# check whether obj has valid values. For iterable obj, return False if all items are not valid else return True
 def has_valid_value(obj):
+    """Check whether obj has valid values. For iterable obj, return False if all items are not valid else return True."""
     ret = False
     if isinstance(obj, Iterable):
         if type(obj) == dict:
