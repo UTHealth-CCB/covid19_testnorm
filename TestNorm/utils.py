@@ -13,7 +13,7 @@ def pre_tokenize(text, trip_non_alnum=False, insert_period=False, windows_style=
         windows_style: bool, text's CRLF as '\r\n if windows-style else '\n', False by default    
 
     Returns:
-        Tokenized str
+        Tokenized text
     """
     period = '.' if insert_period else ''
     CRLF = '\r\n' if windows_style else '\n'    
