@@ -3,30 +3,30 @@ import functools
 from collections import Iterable
 
 def pre_tokenize(text, trip_non_alnum=False, insert_period=False, windows_style=False):  
-    """Preprocessing for query string with tokenization.
+    """Preprocessing for query text with tokenization.
     insert preceding and subsequent space for non-alphabetnumeric character and replace multiple space with one space
 
     Args:
         text: input text
         trip_non_alnum: bool, trip non alpha&number character and replace it with ' ' if True else keep all characters, False by default
         inert_period: bool, inser period(.) before '\n' if True, False by default
-        windows_style: bool, str is windows-style for CRLF as '\r\n else '\n', False by default    
+        windows_style: bool, text's CRLF as '\r\n if windows-style else '\n', False by default    
 
     Returns:
         Tokenized str
     """
     period = '.' if insert_period else ''
     CRLF = '\r\n' if windows_style else '\n'    
-    str = str.replace(CRLF, '.'+CRLF) if str.find(CRLF)>=0 else str+period
+    text = text.replace(CRLF, '.'+CRLF) if text.find(CRLF)>=0 else text+period
     if trip_non_alnum:
-        str = ''.join([c if c.isalnum() else ' ' for c in str]) 
+        text = ''.join([c if c.isalnum() else ' ' for c in text]) 
     else:
-        str = ''.join([c if c.isalnum() else ' '+c+' ' for c in str]) 
-    str = re.sub(' +', ' ', str) 
+        text = ''.join([c if c.isalnum() else ' '+c+' ' for c in text]) 
+    text = re.sub(' +', ' ', text) 
     CRLF_new = period+' \r \n ' if windows_style else period+' \n '
-    str = re.sub(CRLF_new, period+CRLF, str)
-    str = str.strip(' ') # if no CRLF included, strip ' ' at both sides
-    return str
+    text = re.sub(CRLF_new, period+CRLF, text)
+    text = text.strip(' ') # if no CRLF included, strip ' ' at both sides
+    return text
 
 def contains(source, target, whole_match=True):
     """Judge whether source contains target    
