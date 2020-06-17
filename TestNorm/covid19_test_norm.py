@@ -18,7 +18,7 @@ def load_rules_data():
     """Load rules data"""
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     data_dir = os.path.join(cur_dir, '../data')
-    covid19_lexicons_fn = 'covid19_lexicons.csv'
+    covid19_lexicons_fn = 'Covid19_lexicons.csv'
     covid19_testkits_fn = 'LIVD-SARS-CoV-2-2020-06-02_LOINC-MAPPING.csv' #downloaded and extracted from https://www.cdc.gov/csels/dls/sars-cov-2-livd-codes.html and https://loinc.org/sars-coronavirus-2/
     loinc_sarscov2_labtests_fn = 'Loinc_Sarscov2_Export_20200603.csv' # downloaded from https://loinc.org/sars-coronavirus-2
 
