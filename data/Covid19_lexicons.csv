@@ -23,6 +23,9 @@ Blood,Pl
 Blood,SerP
 Blood,SerPl
 Blood,SerPlas
+Blood,blood spot
+Blood,Dried blood spot
+Blood,DBS
 ,
 Respiratory,ORAL PORTION OF NASOPHARYNX
 Respiratory,NASAL SEPTUM
@@ -190,6 +193,8 @@ Antibody_Method,Immunoassay
 Antibody_Method,IA
 Antibody_Method,Rapid
 Antibody_Method,Elisa
+Antibody_Method,Pseudovirus neutralization test
+Antibody_Method,pVNT
 ,
 Panel_Method,Panel
 Panel_Method,Panl

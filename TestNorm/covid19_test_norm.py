@@ -39,7 +39,7 @@ def load_rules_data():
     # load LOINC_IVD_test_kits
     covid19_testkits_pfn = os.path.join(data_dir, covid19_testkits_fn)
     if os.path.exists(covid19_testkits_pfn):
-        df_covid19_testkits = pd.read_csv(covid19_testkits_pfn, encoding='utf-8')
+        df_covid19_testkits = pd.read_csv(covid19_testkits_pfn, encoding='latin-1')
     else:
         raise Exception('Can not find {}'.format(covid19_testkits_pfn))
     df_covid19_testkits.fillna('', inplace=True)
@@ -280,16 +280,22 @@ def get_loinc_codes_as_rna_naa(source, ner_dict, default_specimen=''):
             # may update later if more LOINC code rules available on LOINC website
             loinc_codes = ['94565-9']
     else:
-        if ner_dict['System']['Saliva'] or (default_specimen == 'Saliva'):
-            loinc_codes = ['94845-5']
-        elif ner_dict['System']['Respiratory'] or ner_dict['System']['NP'] or (default_specimen == 'Respiratory'):
+        if ner_dict['System']['Respiratory'] or ner_dict['System']['NP'] or (default_specimen == 'Respiratory'):
             # The order matters, especially for panel, SARS-related CoV, etc. 
             # NP is a special respiratory specimen, for sars-cov-2, different codes maybe used, for sars-related, the same codes can be assigned
             if ner_dict['Method']['Panel']:
-                loinc_codes = ['94531-1']
+                if contains(source,'Influenza') or contains(source,'flu'):
+                    if contains(source,'N gene') or contains(source,'N'):
+                        loinc_codes = ['95422-2']
+                    else:
+                        loinc_codes = ['95380-2']
+                else:
+                    loinc_codes = ['94531-1']
             elif ner_dict['Component']['Covid19_Related']:
                 if contains(source, 'MERS'):                            
                     loinc_codes = ['94532-9']
+                elif contains(source, 'E gene'):
+                    loinc_codes = ['94758-0']
                 else:                             
                     loinc_codes = ['94502-2']                         
             else:
@@ -298,11 +304,23 @@ def get_loinc_codes_as_rna_naa(source, ner_dict, default_specimen=''):
                         loinc_codes = ['94760-6']
                     else:
                         loinc_codes = ['94759-8']
+                elif (ner_dict['System']['Saliva'] and (not ner_dict['System']['Respiratory'])):
+                    if (contains(source, 'N gene') or contains(source, 'N')):
+                        loinc_codes = ['95425-5']
+                    else:
+                        loinc_codes = ['94845-5']
                 else:
-                    if contains(source, 'N gene') or contains(source, 'N'):
+                    if contains (source, 'Nasal'):
+                        if (contains(source, 'N gene') or contains(source, 'N')):
+                            loinc_codes = ['95409-9']
+                        else:
+                            loinc_codes = ['95406-5']
+                    elif contains(source, 'N1'):
+                        loinc_codes = ['94756-4']
+                    elif contains(source, 'N2'):
+                        loinc_codes = ['94757-2']
+                    elif contains(source, 'N gene') or contains(source, 'N'):
                         loinc_codes = ['94533-7']
-                    elif contains(source, 'E gene') or contains(source, 'E'):
-                        loinc_codes = ['94758-0']
                     elif contains(source, 'RdRp gene')  or contains(source, 'RdRp'):
                         if ner_dict['Quan_Qual']['Qualitative']:
                             loinc_codes = ['94534-5']
@@ -324,6 +342,8 @@ def get_loinc_codes_as_rna_naa(source, ner_dict, default_specimen=''):
                             loinc_codes = ['94642-6']
                         else:
                             loinc_codes = ['94640-0']   
+                    elif contains(source, 'Influenza') or contains(source,'flu'):
+                        loinc_codes = ['95423-0']
                     else:
                         loinc_codes = ['94500-6']                
         elif ner_dict['System']['Blood'] or (default_specimen == 'Blood'):
@@ -401,7 +421,7 @@ def get_loinc_codes_as_rna_naa(source, ner_dict, default_specimen=''):
                 if ner_dict['Quan_Qual']['Qualitative']:
                     loinc_codes = ['94309-2']
                 elif ner_dict['Quan_Qual']['Quantitative']:
-                    loinc_codes = ['94819-0']
+                    loinc_codes = ['94819-0', '94746-5']
                 else:
                     loinc_codes = ['94309-2']
     return loinc_codes
@@ -413,7 +433,7 @@ def get_loinc_codes_as_rna_sequencing(source, ner_dict):
     else:
         # no Saliva detected, taken as Saliva by default under 'RNA->Sequencing' chain
         # may update later if more LOINC code rules available on LOINC website
-        loinc_codes = ['94822-4']
+        loinc_codes = ['95424-8']
     return loinc_codes
   
 def get_loinc_codes_as_antibody_rapid_ia(source, ner_dict):
@@ -446,7 +466,14 @@ def get_loinc_codes_as_antibody_ia(source, ner_dict):
         # taken as SARS-CoV-2 antibody (non-specific)
         loinc_codes = get_loinc_codes_as_antibody_ia_non_specific(source, ner_dict)
     elif contains(source, 'IgG') and contains(source, 'IgM'):
-        loinc_codes = ['94547-7']                            
+        loinc_codes = ['94547-7']    
+    elif contains(source, 'IgA') and contains(source, 'IgM'):
+        loinc_codes = ['95125-1'] 
+    elif contains(source, 'dried blood spot') or contains(source,'blood spot') or contains(source,'DBS'):
+        if contains(source,'IgG'):
+            loinc_codes = ['94761-4']
+        elif contains(source,'IgM'):
+            loinc_codes = ['95416-4']                      
     elif contains(source, 'IgA'):
         if ner_dict['Quan_Qual']['Qualitative']:
             loinc_codes = ['94562-6']
@@ -468,10 +495,28 @@ def get_loinc_codes_as_antibody_ia(source, ner_dict):
             loinc_codes = ['94506-3']
         else:
             loinc_codes = ['94564-2']
+    elif contains(source,'neutralizing'):
+        if ner_dict['Quan_Qual']['Qualitative']:
+            loinc_codes = ['95411-5']
+        elif ner_dict['Quan_Qual']['Quantitative']:
+            loinc_codes = ['95410-7']
+        else:
+            loinc_codes = ['95411-5']       
     elif ner_dict['Component']['Interpretation']: #contains(source, 'Interpretation') or contains(source, 'recent infection') or contains(source, 'past infection'):
         loinc_codes = ['94661-6']
     else:
         loinc_codes = get_loinc_codes_as_antibody_ia_non_specific(source, ner_dict)
+    return loinc_codes
+
+def get_loinc_codes_as_antibody_pVNT(source, ner_dict):
+    loinc_codes = []
+    if ner_dict['Quan_Qual']['Qualitative']:
+        loinc_codes = ['95411-5']
+    elif ner_dict['Quan_Qual']['Quantitative']:
+        loinc_codes = ['95410-7']
+    else:
+        print('yes')
+        loinc_codes = ['95411-5']
     return loinc_codes
 
 def get_loinc_codes_from_rna(source, ner_dict):
@@ -579,6 +624,8 @@ def get_loinc_codes_from_antibody(source, ner_dict):
                 # if ner_dict['System']['Blood']:
                 # for antibody testing, using blood specimen by default
                 loinc_codes = get_loinc_codes_as_antibody_rapid_ia(source, ner_dict)
+            elif contains(source, 'Pseudovirus') or contains(source, 'pVNT') or contains(source,'neutralizing'):
+                loinc_codes = get_loinc_codes_as_antibody_pVNT(source, ner_dict)
             elif contains(source, 'Immunoassay') or contains(source, 'IA'):
                 #SARS coronavirus 2 Ab [Presence] in Serum or Plasma by Immunoassay
                 if True: #ner_dict['System']['Blood'], for antibody testing, using blood specimen by default
